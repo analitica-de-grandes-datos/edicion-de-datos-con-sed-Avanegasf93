@@ -44,7 +44,7 @@
 # Se utiliza el comando sed para realizar las transformaciones en los datos del archivo data.csv
 cat data.csv \
 # Agrega un cero inicial a los días y meses de una sola cifra al inicio de la línea
-sed 's/\([0-9]\/[0-9]\)$/0\1\/0\1/' \
+sed 's/\(^[0-9]\)\/\([0-9]\)/0\1\/0\2/' \
 
 # Agrega '20' al año en formato YY
 sed 's/\/\([0-9][0-9]\);/\/20\1;/' \
