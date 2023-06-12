@@ -56,7 +56,7 @@ sed -e 's/\(^[0-9]\)\/\([0-9]\)/0\1\/0\2/' \  # Agrega un cero inicial a los dí
     -e 's/.*/\U&/' \  # Convierte el texto a mayúsculas
     -e 's/\//-/g' \  # Reemplaza las barras '/' por guiones '-'
     -e 's/,$/,\\N/g'  # Agrega escape a '\N' al final de la línea
-
+    -e data.csv > output.csv
 
 
 
