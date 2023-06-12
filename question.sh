@@ -41,7 +41,6 @@
 #
 #  >>> Escriba su codigo a partir de este punto <<<
 #
-cat data.csv \
 sed -e 's/\(^[0-9]\)\/\([0-9]\)/0\1\/0\2/' \  # Agrega un cero inicial a los días y meses de una sola cifra
     -e 's/\/\([0-9]\/\)/\/0\1/' \  # Agrega un cero inicial a los días y meses de una sola cifra en medio de la línea
     -e 's/\/\([0-9][0-9]\);/\/20\1;/' \  # Agrega '20' al año en formato YY
