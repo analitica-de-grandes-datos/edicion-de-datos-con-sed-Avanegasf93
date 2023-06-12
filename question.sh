@@ -80,4 +80,4 @@ sed 's/;/,/g' | \
 sed 's/,,/,\\N,/g' | \
 
 # Reemplaza las barras '/' por guiones '-'
-sed 's/\//-/g' data.csv > output.csv
+sed 's/\//-/g'
