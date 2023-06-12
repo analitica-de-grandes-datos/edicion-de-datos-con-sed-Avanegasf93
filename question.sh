@@ -45,16 +45,16 @@
 # Se utiliza el comando sed para realizar las transformaciones en los datos del archivo data.csv
 
 # Agrega un cero inicial a los días y meses de una sola cifra al inicio de la línea
-sed -E 's/^(0?[1-9])\/(0?[1-9])/\10\2/' data.csv | \
+sed -E 's/^([0-9])\/([0-9])$/0\1\/0\2/' data.csv | \
 
 # Agrega un cero inicial a los días y meses de una sola cifra en medio de la línea
-sed -E 's/\/(0?[1-9])\//\/0\1\//' | \
+sed -E 's/\/([0-9])\//\/0\1\//' | \
 
 # Agrega '20' al año en formato YY
 sed -E 's/\/([0-9][0-9]);/\/20\1;/' | \
 
 # Cambia el formato de las fechas a YYYY-MM-DD
-sed -E 's|([0-9]{2})\/([0-9]{2})\/([0-9]{2})|20\3-\2-\1|g' | \
+sed -E 's|([0-9]{2})/([0-9]{2})/([0-9]{2})|20\3-\2-\1|g' | \
 
 # Reemplaza 'n' o 'N' con '\N' para representar valores nulos
 sed 's/[nN]/\\N/g' | \
@@ -71,8 +71,14 @@ sed 's/,/./g' | \
 # Reemplaza los puntos y comas por comas para separar los campos
 sed 's/;/,/g' | \
 
-# Reemplaza dos comas consecutivas por ',\N,' para indicar valores nulos
+# Reemplaza dos comas consecutivas por ',\\N,' para indicar valores nulos
 sed 's/,,/,\\N,/g' | \
+
+# Reemplaza 'n' por 'N'
+sed 's/n/N/g' | \
+
+# Agrega escape a '\N' después de una coma
+sed 's/,N/,\\N/g' | \
 
 # Convierte el texto a mayúsculas
 sed 's/.*/\U&/' | \
