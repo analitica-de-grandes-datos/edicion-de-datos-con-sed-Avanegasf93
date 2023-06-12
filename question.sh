@@ -68,7 +68,7 @@ sed 's/,,/,\N,/g'  |
 # Reemplaza 'n' con '\N' para representar valores nulos
 sed 's/n/N/g'  |
 
-# Reemplaza ';N' con ';\\N' para representar valores nulos
+# Reemplaza ',N' con ',\\N' para representar valores nulos
 sed 's/,N/,\\N/g'  |
 
 # Convierte el texto a mayúsculas
@@ -78,4 +78,4 @@ sed 's/.*/\U&/'  |
 sed 's/\//-/g'  |
 
 # Agrega escape a '\N' al final de la línea
-sed 's/,$/;\\N/g'
+sed 's/,$/,\\N/g'
