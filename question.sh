@@ -42,33 +42,21 @@
 #  >>> Escriba su codigo a partir de este punto <<<
 #
 cat data.csv \
-# Convertir el formato de las fechas de DD/MM/YY a YYYY-MM-DD
-s@/\([0-9][0-9]\)/\([0-9][0-9]\)/\([0-9][0-9]\);@/20\3-\2-\1,@;
-s@\([0-9]\)/\([0-9]\)/\([0-9][0-9][0-9][0-9]\);@0\1/0\2/\3,@;
-s@\([0-9][0-9]\)/\([0-9][0-9]\)/\([0-9][0-9][0-9][0-9]\);@\3-\2-\1,@;
-
-# Transformar campos nulos en \N
-s/,N/,\\N/g;
-s/,,/,\N,/g;
-s/n/N/g;
-
-# Reemplazar ; por ,
-y/;/,/;
-
-# Usar . para indicar decimales
-s/,/\./g;
-
-# Agregar \N al final de las líneas sin campo
-s/,$/,\\N/;
-
-# Reemplazar / por -
-s/\//-/g;
-
-# Convertir el formato de las fechas de D-M-YY a YYYY-MM-DD
-s/\([0-9]\)-\([0-9]\)-\([0-9][0-9]\)/20\1-\2-\3/;
-
-# Convertir el formato de los decimales de D.DDD a D.DD
-s/\([0-9]\)\.\([0-9][0-9][0-9]\)/\1.\2/g;
+sed -e 's/\(^[0-9]\)\/\([0-9]\)/0\1\/0\2/' \  # Agrega un cero inicial a los días y meses de una sola cifra
+    -e 's/\/\([0-9]\/\)/\/0\1/' \  # Agrega un cero inicial a los días y meses de una sola cifra en medio de la línea
+    -e 's/\/\([0-9][0-9]\);/\/20\1;/' \  # Agrega '20' al año en formato YY
+    -e 's/\([0-9][0-9]\)\/\([0-9][0-9]\)\/\([0-9][0-9]\)/20\3-\2-\1/g' \  # Cambia el formato de las fechas a YYYY-MM-DD
+    -e 's/\(\\*[nN]\)/\\N/' \  # Reemplaza 'n' o 'N' con '\N' para representar valores nulos
+    -e 's/\(;\)N/\;\\N/' \  # Reemplaza ';N' con ';\\N' para representar valores nulos
+    -e 's/\(;;\)/;\N;/' \  # Agrega ';\\N' entre dos puntos y coma consecutivos
+    -e 's|,|.|g' \  # Reemplaza las comas por puntos para representar decimales
+    -e 's|;|,|g' \  # Reemplaza los puntos y comas por comas para separar los campos
+    -e 's/,,/,\\N,/g' \  # Reemplaza dos comas consecutivas por ',\N,' para indicar valores nulos
+    -e 's/n/N/g' \  # Reemplaza 'n' por 'N'
+    -e 's/,N/,\\N/g' \  # Agrega escape a '\N' después de una coma
+    -e 's/.*/\U&/' \  # Convierte el texto a mayúsculas
+    -e 's/\//-/g' \  # Reemplaza las barras '/' por guiones '-'
+    -e 's/,$/,\\N/g'  # Agrega escape a '\N' al final de la línea
 
 
 
