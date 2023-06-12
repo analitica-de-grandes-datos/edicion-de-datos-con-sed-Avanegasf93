@@ -45,16 +45,16 @@
 cat data.csv |
 
 # Agrega '20' al año en formato YY
-sed 's/\/\([0-9][0-9]\);/\/20\1;/'  |
+sed 's/\/\([0-9][0-9]\);/\/20\1;/g'  |
 
 # Cambia el orden de la fecha a DD-MM-YYYY
-sed 's/\([0-9]*\)\/\([0-9]*\)\/\([0-9]*\);/\3\/\2\/\1;/'  |
+sed 's/\([0-9]*\)\/\([0-9]*\)\/\([0-9]*\);/\3\/\2\/\1;/g'  |
 
 # Esta expresión agrega un cero al número de mes si solo tiene un dígito.
-sed 's/\/\([0-9]\)\//\/0\1\//'  |
+sed 's/\/\([0-9]\)\//\/0\1\//g'  |
 
 # Esta expresión agrega un cero al número de día si solo tiene un dígito.
-sed 's/\/\([0-9]\);/\/0\1;/'  |
+sed 's/\/\([0-9]\);/\/0\1;/g'  |
 
 # Reemplaza las comas por puntos para representar decimales
 sed 's/,/\./g'  |
