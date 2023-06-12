@@ -66,7 +66,7 @@ sed 's/;/,/g'  |
 sed 's/,,/,\N,/g'  |
 
 # Reemplaza 'n' o 'N' con '\N' para representar valores nulos
-sed 's/n/\\N/g; s/N/\\N/g'  |
+sed 's/n/N/g; s/N/\N/g'  |
 
 # Reemplaza ';N' con ';\\N' para representar valores nulos
 sed 's/,N/,\\N/g'  |
