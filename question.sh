@@ -41,7 +41,7 @@
 #
 #  >>> Escriba su codigo a partir de este punto <<<
 #
-cat data.csv \
+#cat data.csv \
 # Se utiliza el comando sed para realizar las transformaciones en los datos del archivo data.csv
 
 # Agrega un cero inicial a los días y meses de una sola cifra al inicio de la línea
