@@ -41,3 +41,41 @@
 #
 #  >>> Escriba su codigo a partir de este punto <<<
 #
+# Se utiliza el comando sed para realizar las transformaciones en los datos del archivo data.csv
+cat data.csv |
+
+# Agrega '20' al año en formato YY
+sed 's/\/\([0-9][0-9]\);/\/20\1;/g'  |
+
+# Cambia el orden de la fecha a DD-MM-YYYY
+sed 's/\([0-9]*\)\/\([0-9]*\)\/\([0-9]*\);/\3\/\2\/\1;/g'  |
+
+# Esta expresión agrega un cero al número de mes si solo tiene un dígito.
+sed 's/\/\([0-9]\)\//\/0\1\//g'  |
+
+# Esta expresión agrega un cero al número de día si solo tiene un dígito.
+sed 's/\/\([0-9]\);/\/0\1;/g'  |
+
+# Reemplaza las comas por puntos para representar decimales
+sed 's/,/\./g'  |
+
+# Reemplaza los puntos y comas por comas para separar los campos
+sed 's/;/,/g'  |
+
+# Reemplaza dos comas consecutivas por ',\\N,' para indicar valores nulos
+sed 's/,,/,\N,/g'  |
+
+# Reemplaza 'n' o 'N' con '\N' para representar valores nulos
+sed 's/n/N/g; s/N/\N/g'  |
+
+# Reemplaza ';N' con ';\\N' para representar valores nulos
+sed 's/,N/,\\N/g'  |
+
+# Convierte el texto a mayúsculas
+sed 's/.*/\U&/'  |
+
+# Reemplaza las barras '/' por guiones '-'
+sed 's/\//-/g'  |
+
+# Agrega escape a '\N' al final de la línea
+sed 's/,$/,\\N/g'
