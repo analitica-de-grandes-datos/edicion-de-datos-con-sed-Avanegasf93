@@ -50,7 +50,7 @@ sed 's/\(^[0-9]\)\/\([0-9]\)/0\1\/0\2/' \
 sed 's/\/\([0-9][0-9]\);/\/20\1;/' \
 
 # Cambia el orden de la fecha a DD-MM-YYYY
-sed 's/\([0-9]\{2\}\)\/\([0-9]\{2\}\)\/\([0-9]\{4\}\)/\3-\2-\1/g' \
+sed 's/\([0-9]*\)\/\([0-9]*\)\/\([0-9]*\);/\3\/\2\/\1;/' \
 
 # Reemplaza las comas por puntos para representar decimales
 sed 's/,/\./g' \
