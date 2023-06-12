@@ -42,42 +42,42 @@
 #  >>> Escriba su codigo a partir de este punto <<<
 #
 # Se utiliza el comando sed para realizar las transformaciones en los datos del archivo data.csv
-
+cat data.csv \
 # Agrega un cero inicial a los días y meses de una sola cifra al inicio de la línea
-sed -E 's/^([0-9])\/([0-9])$/0\1\/0\2/' | \
+sed -E 's/^([0-9])\/([0-9])$/0\1\/0\2/' \
 
 # Agrega '20' al año en formato YY y cambia el orden de la fecha a DD-MM-YYYY
-sed -E 's/\/([0-9][0-9]);/\/20\1;/; s|([0-9]*)/([0-9]*)/([0-9]*);|\3\/\2\/\1;|' | \
+sed -E 's/\/([0-9][0-9]);/\/20\1;/; s|([0-9]*)/([0-9]*)/([0-9]*);|\3\/\2\/\1;|' \
 
 # Agrega un cero inicial a los días y meses de una sola cifra en medio de la línea
-sed -E 's/\/([0-9])\//\/0\1\//' | \
+sed -E 's/\/([0-9])\//\/0\1\//' \
 
 # Agrega un cero inicial a los días y meses de una sola cifra al final de la línea
-sed -E 's/\/([0-9]);/\/0\1;/' | \
+sed -E 's/\/([0-9]);/\/0\1;/' \
 
 # Reemplaza las comas por puntos para representar decimales
-sed 's/,/\./g' | \
+sed 's/,/\./g' \
 
 # Reemplaza los puntos y comas por comas para separar los campos
-sed 's/;/,/g' | \
+sed 's/;/,/g' \
 
 # Agrega ',\\N' entre dos coma consecutivos
-sed 's/,,/,\N;/g' | \
+sed 's/,,/,\N;/g' \
 
 # Reemplaza dos comas consecutivas por ',\\N,' para indicar valores nulos
-sed 's/,,/,\\N,/g' | \
+sed 's/,,/,\\N,/g' \
 
 # Reemplaza 'n' o 'N' con '\N' para representar valores nulos
-sed 's/\(\*[nN]\)/\\N/g' | \
+sed 's/\(\*[nN]\)/\\N/g' \
 
 # Reemplaza ';N' con ';\\N' para representar valores nulos
-sed 's/;N/;\\N/g' | \
+sed 's/;N/;\\N/g' \
 
 # Convierte el texto a mayúsculas
-sed 's/.*/\U&/' | \
+sed 's/.*/\U&/' \
 
 # Reemplaza las barras '/' por guiones '-'
-sed 's/\//-/g'
+sed 's/\//-/g' \
 
 # Agrega escape a '\N' al final de la línea
-sed 's/,$/;\\N/'  | \
+sed 's/,$/;\\N/'
