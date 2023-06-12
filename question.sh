@@ -83,4 +83,4 @@ sed 's/,,/,\\N,/g' | \
 # Reemplaza las barras '/' por guiones '-'
 sed 's/\//-/g' | \
 
-> output.csv
+#> output.csv
