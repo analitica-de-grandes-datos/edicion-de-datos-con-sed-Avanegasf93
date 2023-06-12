@@ -56,17 +56,14 @@ sed -E 's/\/([0-9])\//\/0\1\//' | \
 # Agrega un cero inicial a los días y meses de una sola cifra al final de la línea
 sed -E 's/\/([0-9]);/\/0\1;/' | \
 
-# Reemplaza 'n' por '\N' para representar valores nulos
-sed 's/n/\\N/g' | \
-
-# Reemplaza 'N' por '\N' para representar valores nulos
-sed 's/N/\\N/g' | \
+# Reemplaza 'n' o 'N' con '\N' para representar valores nulos
+sed 's/\(\*[nN]\)/\\N/g' | \
 
 # Reemplaza ';N' con ';\\N' para representar valores nulos
 sed 's/;N/;\\N/g' | \
 
 # Agrega ';\\N' entre dos puntos y coma consecutivos
-sed 's/;;/;\N;/g' | \
+sed 's/;;/;\\N;/g' | \
 
 # Reemplaza las comas por puntos para representar decimales
 sed 's/,/./g' | \
@@ -90,4 +87,4 @@ sed 's/.*/\U&/' | \
 sed 's/\//-/g' | \
 
 # Agrega escape a '\N' al final de la línea
-sed 's/,$/,\\N/' > output.csv
+sed 's/,$/;\\N/' > output.csv
