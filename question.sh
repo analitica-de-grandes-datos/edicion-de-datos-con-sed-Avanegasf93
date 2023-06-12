@@ -45,10 +45,10 @@
 cat data.csv \
 
 # Esta expresión agrega un cero al número de mes si solo tiene un dígito.
-sed 's/\/\([0-9]\)\//\/0\1\//'
+sed 's/\/\([0-9]\)\//\/0\1\//' \
 
 # Esta expresión agrega un cero al número de día si solo tiene un dígito.
-sed 's/\/\([0-9]\);/\/0\1;/'
+sed 's/\/\([0-9]\);/\/0\1;/' \
 
 # Agrega '20' al año en formato YY
 sed 's/\/\([0-9][0-9]\);/\/20\1;/' \
