@@ -74,4 +74,4 @@ sed 's/.*/\U&/' \
 sed 's/\//-/g' \
 
 # Agrega escape a '\N' al final de la línea
-sed 's/,$/;\\N/'
+sed 's/,$/;\\N/g'
