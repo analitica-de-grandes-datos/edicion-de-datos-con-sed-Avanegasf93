@@ -55,6 +55,15 @@ sed -E 's/\/([0-9])\//\/0\1\//' | \
 # Agrega un cero inicial a los días y meses de una sola cifra al final de la línea
 sed -E 's/\/([0-9]);/\/0\1;/' | \
 
+# Reemplaza las comas por puntos para representar decimales
+sed 's/,/\./g' | \
+
+# Reemplaza los puntos y comas por comas para separar los campos
+sed 's/;/,/g' | \
+
+# Agrega ',\\N' entre dos coma consecutivos
+sed 's/,,/,\\N;/g' | \
+
 # Reemplaza 'n' o 'N' con '\N' para representar valores nulos
 sed 's/\(\*[nN]\)/\\N/g' | \
 
@@ -69,12 +78,6 @@ sed 's/,$/;\\N/'  | \
 
 # Convierte el texto a mayúsculas
 sed 's/.*/\U&/' | \
-
-# Reemplaza las comas por puntos para representar decimales
-sed 's/,/./g' | \
-
-# Reemplaza los puntos y comas por comas para separar los campos
-sed 's/;/,/g' | \
 
 # Reemplaza dos comas consecutivas por ',\\N,' para indicar valores nulos
 sed 's/,,/,\\N,/g' | \
