@@ -43,8 +43,12 @@
 #
 # Se utiliza el comando sed para realizar las transformaciones en los datos del archivo data.csv
 cat data.csv \
-# Agrega un cero inicial a los días y meses de una sola cifra al inicio de la línea
-sed 's/\(^[0-9]\)\/\([0-9]\)/0\1\/0\2/' \
+
+# Esta expresión agrega un cero al número de mes si solo tiene un dígito.
+sed 's/\/\([0-9]\)\//\/0\1\//'
+
+# Esta expresión agrega un cero al número de día si solo tiene un dígito.
+sed 's/\/\([0-9]\);/\/0\1;/'
 
 # Agrega '20' al año en formato YY
 sed 's/\/\([0-9][0-9]\);/\/20\1;/' \
@@ -59,7 +63,7 @@ sed 's/,/\./g' \
 sed 's/;/,/g' \
 
 # Reemplaza dos comas consecutivas por ',\\N,' para indicar valores nulos
-sed 's/,,/,\\N,/g' \
+sed 's/,,/,\N,/g' \
 
 # Reemplaza 'n' o 'N' con '\N' para representar valores nulos
 sed 's/\(\*[nN]\)/\\N/g' \
