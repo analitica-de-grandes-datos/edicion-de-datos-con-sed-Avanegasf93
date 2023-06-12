@@ -65,6 +65,12 @@ sed 's/;N/;\\N/g' | \
 # Agrega ';\\N' entre dos puntos y coma consecutivos
 sed 's/;;/;\\N;/g' | \
 
+# Agrega escape a '\N' al final de la línea
+sed 's/,$/;\\N/'  | \
+
+# Convierte el texto a mayúsculas
+sed 's/.*/\U&/' | \
+
 # Reemplaza las comas por puntos para representar decimales
 sed 's/,/./g' | \
 
@@ -74,17 +80,7 @@ sed 's/;/,/g' | \
 # Reemplaza dos comas consecutivas por ',\\N,' para indicar valores nulos
 sed 's/,,/,\\N,/g' | \
 
-# Reemplaza 'n' por 'N'
-sed 's/n/N/g' | \
-
-# Agrega escape a '\N' después de una coma
-sed 's/,N/,\\N/g' | \
-
-# Convierte el texto a mayúsculas
-sed 's/.*/\U&/' | \
-
 # Reemplaza las barras '/' por guiones '-'
 sed 's/\//-/g' | \
 
-# Agrega escape a '\N' al final de la línea
-sed 's/,$/;\\N/' > output.csv
+ > output.csv
