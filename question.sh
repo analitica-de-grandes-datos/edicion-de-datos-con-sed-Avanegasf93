@@ -56,8 +56,11 @@ sed -E 's/\/([0-9])\//\/0\1\//' | \
 # Agrega un cero inicial a los días y meses de una sola cifra al final de la línea
 sed -E 's/\/([0-9]);/\/0\1;/' | \
 
-# Reemplaza 'n' o 'N' con '\N' para representar valores nulos
-sed 's/[nN]/\\N/g' | \
+# Reemplaza 'n' por '\N' para representar valores nulos
+sed 's/n/\\N/g' | \
+
+# Reemplaza 'N' por '\N' para representar valores nulos
+sed 's/N/\\N/g' | \
 
 # Reemplaza ';N' con ';\\N' para representar valores nulos
 sed 's/;N/;\\N/g' | \
