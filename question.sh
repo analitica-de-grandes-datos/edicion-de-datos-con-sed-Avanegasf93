@@ -53,7 +53,7 @@ sed 's/\/\([0-9]\/\)/\/0\1/' | \
 sed 's/\/\([0-9][0-9]\);/\/20\1;/' | \
 
 # Cambia el formato de las fechas a YYYY-MM-DD
-sed 's/\([0-9][0-9]\)\/\([0-9][0-9]\)\/\([0-9][0-9]\)/20\3-\2-\1/g' | \
+sed 's/\([0-9][0-9]\)\/\([0-9][0-9]\)\/\([0-9][0-9]\)/20\3-\2-\1/g'| \
 
 # Reemplaza 'n' o 'N' con '\N' para representar valores nulos
 sed 's/\(\\*[nN]\)/\\N/' | \
