@@ -62,7 +62,10 @@ sed 's/,/\./g' | \
 sed 's/;/,/g' | \
 
 # Agrega ',\\N' entre dos coma consecutivos
-sed 's/,,/,\\N;/g' | \
+sed 's/,,/,\N;/g' | \
+
+# Reemplaza dos comas consecutivas por ',\\N,' para indicar valores nulos
+sed 's/,,/,\\N,/g' | \
 
 # Reemplaza 'n' o 'N' con '\N' para representar valores nulos
 sed 's/\(\*[nN]\)/\\N/g' | \
@@ -70,17 +73,11 @@ sed 's/\(\*[nN]\)/\\N/g' | \
 # Reemplaza ';N' con ';\\N' para representar valores nulos
 sed 's/;N/;\\N/g' | \
 
-# Agrega ';\\N' entre dos puntos y coma consecutivos
-sed 's/;;/;\\N;/g' | \
-
-# Agrega escape a '\N' al final de la línea
-sed 's/,$/;\\N/'  | \
-
 # Convierte el texto a mayúsculas
 sed 's/.*/\U&/' | \
 
-# Reemplaza dos comas consecutivas por ',\\N,' para indicar valores nulos
-sed 's/,,/,\\N,/g' | \
-
 # Reemplaza las barras '/' por guiones '-'
 sed 's/\//-/g'
+
+# Agrega escape a '\N' al final de la línea
+sed 's/,$/;\\N/'  | \
