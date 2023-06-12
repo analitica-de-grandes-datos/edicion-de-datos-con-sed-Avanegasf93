@@ -42,20 +42,33 @@
 #  >>> Escriba su codigo a partir de este punto <<<
 #
 cat data.csv \
-| sed 's/\/\([0-9][0-9]\)\/\([0-9][0-9]\)\/\([0-9][0-9]\);/20\3-\2-\1,/' \
-| sed 's/\/\([0-9][0-9]\)\/\([0-9][0-9]\)\/\([0-9][0-9]\)/20\3-\2-\1/' \
-| sed 's/\/\([0-9]\)\//\/0\1\//' \
-| sed 's/\/\([0-9]\);/\/0\1,/' \
-| sed 's/,N/,\\N/g' \
-| sed 's/,,/,\N,/g' \
-| sed 's/n/N/g' \
-| sed 's/;/,/g' \
-| sed 's/,/\./g' \
-| sed 's/.*/\U&/' \
-| sed 's/,$/,\\N/' \
-| sed 's/\//-/g' \
-| sed 's/\([0-9]\)-\([0-9]\)-\([0-9][0-9]\)/20\1-\2-\3/' \
-| sed 's/\([0-9]\)\.\([0-9][0-9][0-9]\)/\1.\2/g'
+# Convertir el formato de las fechas de DD/MM/YY a YYYY-MM-DD
+s@/\([0-9][0-9]\)/\([0-9][0-9]\)/\([0-9][0-9]\);@/20\3-\2-\1,@;
+s@\([0-9]\)/\([0-9]\)/\([0-9][0-9][0-9][0-9]\);@0\1/0\2/\3,@;
+s@\([0-9][0-9]\)/\([0-9][0-9]\)/\([0-9][0-9][0-9][0-9]\);@\3-\2-\1,@;
+
+# Transformar campos nulos en \N
+s/,N/,\\N/g;
+s/,,/,\N,/g;
+s/n/N/g;
+
+# Reemplazar ; por ,
+y/;/,/;
+
+# Usar . para indicar decimales
+s/,/\./g;
+
+# Agregar \N al final de las líneas sin campo
+s/,$/,\\N/;
+
+# Reemplazar / por -
+s/\//-/g;
+
+# Convertir el formato de las fechas de D-M-YY a YYYY-MM-DD
+s/\([0-9]\)-\([0-9]\)-\([0-9][0-9]\)/20\1-\2-\3/;
+
+# Convertir el formato de los decimales de D.DDD a D.DD
+s/\([0-9]\)\.\([0-9][0-9][0-9]\)/\1.\2/g;
 
 
 
